@@ -1,0 +1,224 @@
+{
+  "name": "erp-ui-layout",
+  "path": "/Applications/woking/congviec/erp-ui-layout",
+  "type": "directory",
+  "children": [
+    { "name": "index.html", "type": "file" },
+    { "name": "package.json", "type": "file" },
+    { "name": "package-lock.json", "type": "file" },
+    { "name": "postcss.config.js", "type": "file" },
+    { "name": "tailwind.config.js", "type": "file" },
+    { "name": "vite.config.js", "type": "file" },
+    { "name": "erp-ui-layout.zip", "type": "file" },
+    {
+      "name": "src",
+      "type": "directory",
+      "children": [
+        { "name": "App.jsx", "type": "file" },
+        { "name": "main.jsx", "type": "file" },
+        { "name": "index.css", "type": "file" },
+        { "name": "ui-helpers.jsx", "type": "file" },
+        {
+          "name": "check",
+          "type": "directory",
+          "children": [
+            { "name": "Check.jsx", "type": "file" },
+            {
+              "name": "default",
+              "type": "directory",
+              "children": [
+                { "name": "app_shell_final_v_0.jsx", "type": "file" },
+                { "name": "auth_gateway_final_v_0.jsx", "type": "file" },
+                { "name": "erp_entry_orchestrator_v_0.jsx", "type": "file" },
+                { "name": "ui_00_ceo_final_v_0.jsx", "type": "file" },
+                { "name": "ui_00_role_0_ceo_shell.jsx", "type": "file" },
+                { "name": "ui_10_exec_final_v_0.jsx", "type": "file" },
+                { "name": "ui_20_director_final_v_0.jsx", "type": "file" },
+                { "name": "ui_30_manager_final_v_0.jsx", "type": "file" },
+                { "name": "ui_t_0_external_token_access_guest_probation_vendor_v_0_1.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui",
+              "type": "directory",
+              "children": [
+                { "name": "UI00_Shell.jsx", "type": "file" },
+                { "name": "UI01_Dashboard00.jsx", "type": "file" },
+                { "name": "UI02_ApprovalExec.jsx", "type": "file" },
+                { "name": "UI03_ExecutiveCockpit.jsx", "type": "file" },
+                { "name": "UI04_NewComponent.jsx", "type": "file" },
+                { "name": "UI05.jsx", "type": "file" },
+                { "name": "UI06_SystemShortcuts.jsx", "type": "file" },
+                { "name": "UI07_ActivityAudit.jsx", "type": "file" },
+                { "name": "UI08_GlobalSearch.jsx", "type": "file" },
+                { "name": "UI09_SystemStatus.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui-00",
+              "type": "directory",
+              "children": [
+                { "name": "UI00_Shell.jsx", "type": "file" },
+                { "name": "UI01_Dashboard00.jsx", "type": "file" },
+                { "name": "UI02_ApprovalExec.jsx", "type": "file" },
+                { "name": "UI03_ExecutiveCockpit.jsx", "type": "file" },
+                { "name": "UI06_SystemShortcuts.jsx", "type": "file" },
+                { "name": "UI07_ActivityAudit.jsx", "type": "file" },
+                { "name": "UI08_GlobalSearch.jsx", "type": "file" },
+                { "name": "UI09_SystemStatus.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui-10",
+              "type": "directory",
+              "children": [
+                { "name": "UI10.jsx", "type": "file" },
+                { "name": "UI11.jsx", "type": "file" },
+                { "name": "UI12_ProductionPlanning.jsx", "type": "file" },
+                { "name": "UI13_FinanceCockpit.jsx", "type": "file" },
+                { "name": "UI14_CRM360.jsx", "type": "file" },
+                { "name": "UI15_LogisticsDashboard.jsx", "type": "file" },
+                { "name": "UI16_HRM_CVBuilder.jsx", "type": "file" },
+                { "name": "UI17_OKRDesigner.jsx", "type": "file" },
+                { "name": "UI18_ProjectPortfolio.jsx", "type": "file" },
+                { "name": "UI20_RealtimeCollab.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui-20",
+              "type": "directory",
+              "children": [
+                { "name": "UI20_RealtimeCollab.jsx", "type": "file" },
+                { "name": "UI21_RealEstateAsset.jsx", "type": "file" },
+                { "name": "UI22_Procurement.jsx", "type": "file" },
+                { "name": "UI23_Support.jsx", "type": "file" },
+                { "name": "UI24_Sales.jsx", "type": "file" },
+                { "name": "UI26_CustomModule.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui-30",
+              "type": "directory",
+              "children": [
+                { "name": "UI30_ProcessOrchestration.jsx", "type": "file" },
+                { "name": "UI31_WorkflowBuilder.jsx", "type": "file" },
+                { "name": "UI32_FormDesigner.jsx", "type": "file" },
+                { "name": "UI33_RulesEngine.jsx", "type": "file" },
+                { "name": "UI34_DocGenTemplate.jsx", "type": "file" },
+                { "name": "UI35_DataPipelines.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui-40",
+              "type": "directory",
+              "children": [
+                { "name": "UI40_DataGovernance.jsx", "type": "file" },
+                { "name": "UI41_SecurityOps.jsx", "type": "file" },
+                { "name": "UI42_AuditTrailExplorer.jsx", "type": "file" },
+                { "name": "UI43_DataCatalog.jsx", "type": "file" },
+                { "name": "UI44_DataQuality.jsx", "type": "file" },
+                { "name": "UI45_PrivacyCenter.jsx", "type": "file" },
+                { "name": "UI46_DataCatalogBrowser.jsx", "type": "file" },
+                { "name": "UI47_DataLineage.jsx", "type": "file" },
+                { "name": "UI48_CompliancePolicyManager.jsx", "type": "file" },
+                { "name": "UI49_ConsentAudit.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui-50",
+              "type": "directory",
+              "children": [
+                { "name": "UI50_AIWorkbench.jsx", "type": "file" },
+                { "name": "UI51_AgentOrchestrator.jsx", "type": "file" },
+                { "name": "UI52_GenerativeStudio.jsx", "type": "file" },
+                { "name": "UI53_ModelMonitoring.jsx", "type": "file" },
+                { "name": "UI54_ConversationDesigner.jsx", "type": "file" },
+                { "name": "UI55_MLOpsDashboard.jsx", "type": "file" },
+                { "name": "UI56_ModelExplainability.jsx", "type": "file" },
+                { "name": "UI57_DatasetCatalog.jsx", "type": "file" },
+                { "name": "UI58_FeatureStoreBrowser.jsx", "type": "file" },
+                { "name": "UI59_ExperimentTracker.jsx", "type": "file" }
+              ]
+            },
+            {
+              "name": "ui-60",
+              "type": "directory",
+              "children": [
+                { "name": "UI60_PipelineMonitor.jsx", "type": "file" },
+                { "name": "UI61_ServiceCatalog.jsx", "type": "file" },
+                { "name": "UI62_SecretsManagerUI.jsx", "type": "file" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "components",
+          "type": "directory",
+          "children": [
+            { "name": "CommandPalette.jsx", "type": "file" },
+            { "name": "EmptyState.jsx", "type": "file" },
+            { "name": "ErrorBoundary.jsx", "type": "file" },
+            { "name": "FocusTrap.jsx", "type": "file" },
+            { "name": "NotificationPanel.jsx", "type": "file" },
+            { "name": "Sidebar.jsx", "type": "file" },
+            { "name": "Skeleton.jsx", "type": "file" },
+            { "name": "Toasts.jsx", "type": "file" },
+            { "name": "Topbar.jsx", "type": "file" }
+          ]
+        },
+        {
+          "name": "ui-00",
+          "type": "directory",
+          "children": [
+            { "name": "UI00_Shell.jsx", "type": "file" },
+            { "name": "UI01_Dashboard00.jsx", "type": "file" },
+            { "name": "UI02_ApprovalExec.jsx", "type": "file" },
+            { "name": "UI03_ExecutiveCockpit.jsx", "type": "file" },
+            { "name": "UI06_SystemShortcuts.jsx", "type": "file" },
+            { "name": "UI07_ActivityAudit.jsx", "type": "file" },
+            { "name": "UI08_GlobalSearch.jsx", "type": "file" },
+            { "name": "UI09_SystemStatus.jsx", "type": "file" }
+          ]
+        },
+        {
+          "name": "ui-10",
+          "type": "directory",
+          "children": [
+            { "name": "UI12_ProductionPlanning.jsx", "type": "file" },
+            { "name": "UI13_FinanceCockpit.jsx", "type": "file" },
+            { "name": "UI14_CRM360.jsx", "type": "file" },
+            { "name": "UI15_LogisticsDashboard.jsx", "type": "file" },
+            { "name": "UI16_HRM_CVBuilder.jsx", "type": "file" },
+            { "name": "UI17_OKRDesigner.jsx", "type": "file" },
+            { "name": "UI18_ProjectPortfolio.jsx", "type": "file" },
+            { "name": "UI20_RealtimeCollab.jsx", "type": "file" }
+          ]
+        },
+        {
+          "name": "ui-20",
+          "type": "directory",
+          "children": [
+            { "name": "UI20_RealtimeCollab.jsx", "type": "file" },
+            { "name": "UI21_RealEstateAsset.jsx", "type": "file" },
+            { "name": "UI22_Procurement.jsx", "type": "file" },
+            { "name": "UI23_Support.jsx", "type": "file" },
+            { "name": "UI24_Sales.jsx", "type": "file" },
+            { "name": "UI26_CustomModule.jsx", "type": "file" }
+          ]
+        },
+        {
+          "name": "ui-30",
+          "type": "directory",
+          "children": [
+            { "name": "UI30_ProcessOrchestration.jsx", "type": "file" },
+            { "name": "UI31_WorkflowBuilder.jsx", "type": "file" },
+            { "name": "UI32_FormDesigner.jsx", "type": "file" },
+            { "name": "UI33_RulesEngine.jsx", "type": "file" },
+            { "name": "UI34_DocGenTemplate.jsx", "type": "file" },
+            { "name": "UI35_DataPipelines.jsx", "type": "file" }
+          ]
+        }
+      ]
+    }
+  ]
+}
