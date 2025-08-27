@@ -28,7 +28,12 @@ import UI21_RealEstateAsset from "./ui-10/UI21_RealEstateAsset.jsx";
 // // UI-20 Series
 import UI22_Procurement from "./ui-20/UI22_Procurement.jsx";
 import UI23_Support from "./ui-20/UI23_Support.jsx";
+import UI24_WarehouseWMS from "./ui-20/UI24_WarehouseWMS.jsx";
 import UI25_VendorPortal from "./ui-20/UI25_VendorPortal.jsx";
+import UI26_SourcingContractHub from "./ui-20/UI26_SourcingContractHub.jsx";
+import UI27_DataOpsCommandCenter from "./ui-20/UI27_DataOpsCommandCenter.jsx";
+import UI28_VendorManagement360 from "./ui-20/UI28_VendorManagement360.jsx";
+import UI29_InventoryOptimization from "./ui-20/UI29_InventoryOptimization.jsx";
 // // UI-30 Series
 import UI30_ProcessOrchestration from "./ui-30/UI30_ProcessOrchestration.jsx";
 // UI-40 Series
@@ -266,10 +271,50 @@ const __SidebarLinks = () => (
     </div>
     <div>
       <Link
+        to="/check/ui24_warehousewms"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI24_WarehouseWMS
+      </Link>
+    </div>
+    <div>
+      <Link
         to="/check/ui25_vendorportal"
         className="block p-2 rounded hover:bg-gray-100"
       >
         UI25_VendorPortal
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui26_sourcingcontracthub"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI26_SourcingContractHub
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui27_dataopscommandcenter"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI27_DataOpsCommandCenter
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui28_vendorperformance"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI28_VendorManagement360
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui29_inventoryoptimization"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI29_InventoryOptimization
       </Link>
     </div>
 
@@ -568,7 +613,7 @@ function Home() {
 
 export default function Check() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="relative min-h-screen bg-gray-50">
       {/* Header with back button */}
       <div className="sticky top-0 z-30 flex items-center justify-between px-4 h-[54px] py-3 bg-white border-b border-gray-200">
         <div className="flex items-center gap-3">
@@ -579,8 +624,8 @@ export default function Check() {
         </div>
       </div>
 
-      <div className="grid grid-cols-[var(--sidebar-width)_1fr]">
-        <aside className="max-h-[calc(100vh-54px)] sticky top-[54px] left-0 z-10 overflow-y-auto border-r border-gray-200 bg-white">
+      <div className="grid grid-cols-[var(--sidebar-width)_1fr] relative">
+        <aside className="max-h-[calc(100vh-54px)] sticky top-[55px] left-0 z-10 overflow-y-auto border-r border-gray-200 bg-white">
           <div className="p-4">
             <h3 className="mb-2 font-semibold text-gray-900">Pages</h3>
             {React.createElement(__SidebarLinks)}
@@ -651,7 +696,24 @@ export default function Check() {
             {/* UI-20 Series */}
             <Route path="/ui22_procurement" element={<UI22_Procurement />} />
             <Route path="/ui23_support" element={<UI23_Support />} />
+            <Route path="/ui24_warehousewms" element={<UI24_WarehouseWMS />} />
             <Route path="/ui25_vendorportal" element={<UI25_VendorPortal />} />
+            <Route
+              path="/ui26_sourcingcontracthub"
+              element={<UI26_SourcingContractHub />}
+            />
+            <Route
+              path="/ui27_dataopscommandcenter"
+              element={<UI27_DataOpsCommandCenter />}
+            />
+            <Route
+              path="/ui28_vendorperformance"
+              element={<UI28_VendorManagement360 />}
+            />
+            <Route
+              path="/ui29_inventoryoptimization"
+              element={<UI29_InventoryOptimization />}
+            />
 
             {/* UI-30 Series */}
             <Route
@@ -712,7 +774,10 @@ export default function Check() {
               path="/ui56_modelexplainability"
               element={<UI56_ModelExplainability />}
             />
-            <Route path="/ui57_datasetcatalog" element={<UI57_DatasetCatalog />} />
+            <Route
+              path="/ui57_datasetcatalog"
+              element={<UI57_DatasetCatalog />}
+            />
             <Route
               path="/ui58_featurestorebrowser"
               element={<UI58_FeatureStoreBrowser />}
@@ -723,9 +788,18 @@ export default function Check() {
             />
 
             {/* UI-60 Series */}
-            <Route path="/ui60_pipelinemonitor" element={<UI60_PipelineMonitor />} />
-            <Route path="/ui61_servicecatalog" element={<UI61_ServiceCatalog />} />
-            <Route path="/ui62_secretsmanagerui" element={<UI62_SecretsManagerUI />} />
+            <Route
+              path="/ui60_pipelinemonitor"
+              element={<UI60_PipelineMonitor />}
+            />
+            <Route
+              path="/ui61_servicecatalog"
+              element={<UI61_ServiceCatalog />}
+            />
+            <Route
+              path="/ui62_secretsmanagerui"
+              element={<UI62_SecretsManagerUI />}
+            />
 
             {/* Default Series Routes */}
             <Route path="/app_shell_final" element={<AppShellFinal />} />
