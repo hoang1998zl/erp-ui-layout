@@ -1,0 +1,41 @@
+# Node modules
+/node_modules
+
+# Build outputs
+/dist
+/.vite
+/.cache
+/build
+/out
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# macOS
+.DS_Store
+
+# IDEs/editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Test coverage
+coverage/
+.vitest/
+
+# Misc
+*.tgz
+*.zip
+
+# Local overrides
+.local

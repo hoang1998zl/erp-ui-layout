@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { Card, Input, Select, Button, Tag } from '../../ui-helpers.jsx';
+import { ResponsiveContainer, AreaChart, Area, Tooltip } from 'recharts';
 
 export default function UI61_ServiceCatalog() {
   const [services, setServices] = useState([]);
@@ -41,6 +43,7 @@ export default function UI61_ServiceCatalog() {
           owner: ["platform", "sales", "finance", "ops"][i % 4],
           endpoints,
           lastCheckedAt: new Date(Date.now() - i * 1000 * 60 * 60).toISOString(),
+          usage: Array.from({ length: 8 }).map((_, j) => ({ t: j, v: Math.round(Math.random() * 100) })),
         };
       });
 
@@ -102,8 +105,8 @@ export default function UI61_ServiceCatalog() {
       const k = sortBy.key;
       const va = (a[k] || "").toString().toLowerCase();
       const vb = (b[k] || "").toString().toLowerCase();
-      if (va < vb) return sortBy.dir === "asc" ? -1 : 1;
-      if (va > vb) return sortBy.dir === "asc" ? 1 : -1;
+      if (va < vb) return sortBy.dir === 'asc' ? -1 : 1;
+      if (va > vb) return sortBy.dir === 'asc' ? 1 : -1;
       return 0;
     });
 
@@ -145,30 +148,23 @@ export default function UI61_ServiceCatalog() {
 
       <div className="mt-4 flex items-center justify-between gap-4">
         <div className="flex gap-2 items-center">
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by name or id…"
-            className="px-3 py-2 border rounded w-64"
-          />
+          <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search by name or id…" className="w-64" />
 
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="px-2 py-2 border rounded">
+          <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-40">
             <option>All</option>
             <option>Healthy</option>
             <option>Degraded</option>
             <option>Down</option>
-          </select>
+          </Select>
 
-          <button onClick={() => { setQuery(""); setStatusFilter("All"); }} className="px-3 py-2 bg-gray-100 rounded">Clear</button>
+          <Button onClick={() => { setQuery(""); setStatusFilter("All"); }}>Clear</Button>
         </div>
 
         <div className="flex gap-2">
-          <button onClick={refresh} className="px-3 py-2 bg-gray-100 rounded">Refresh</button>
-          <button onClick={() => setRetryToken((t) => t + 1)} className="px-3 py-2 bg-yellow-100 rounded">Retry</button>
-          <button onClick={exportAll} className="px-3 py-2 bg-blue-600 text-white rounded">Export All</button>
-          <button onClick={exportSelected} disabled={selected.size === 0} className={`px-3 py-2 rounded ${selected.size === 0 ? 'bg-gray-200 text-gray-400' : 'bg-green-600 text-white'}`}>
-            Export Selected ({selected.size})
-          </button>
+          <Button onClick={refresh}>Refresh</Button>
+          <Button onClick={() => setRetryToken((t) => t + 1)}>Retry</Button>
+          <Button onClick={exportAll} variant="primary">Export All</Button>
+          <Button onClick={exportSelected} disabled={selected.size === 0}>{`Export Selected (${selected.size})`}</Button>
         </div>
       </div>
 
@@ -181,8 +177,8 @@ export default function UI61_ServiceCatalog() {
                 <div className="text-sm text-red-600 mt-1">{error}</div>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => setRetryToken((t) => t + 1)} className="px-3 py-1 bg-red-600 text-white rounded">Retry</button>
-                <button onClick={refresh} className="px-3 py-1 bg-gray-100 rounded">Refresh</button>
+                <Button onClick={() => setRetryToken((t) => t + 1)} variant="primary">Retry</Button>
+                <Button onClick={refresh}>Refresh</Button>
               </div>
             </div>
           </div>
@@ -190,7 +186,7 @@ export default function UI61_ServiceCatalog() {
 
         <div className="mt-3 bg-white rounded shadow-sm">
           <div className="p-3 border-b flex items-center gap-3">
-            <input type="checkbox" onChange={toggleSelectAllVisible} checked={pageItems.length > 0 && pageItems.every((p) => selected.has(p.id))} />
+            <input type="checkbox" onChange={toggleSelectAllVisible} checked={pageItems.length > 0 && pageItems.every((p) => selected.has(p.id))} aria-label="Select all visible services" />
             <div className="flex-1 flex gap-4 items-center text-sm font-medium">
               <button onClick={() => toggleSort("name")} className="flex items-center gap-1">Name {sortBy.key === 'name' ? (sortBy.dir === 'asc' ? '↑' : '↓') : ''}</button>
               <button onClick={() => toggleSort("status")} className="flex items-center gap-1">Status {sortBy.key === 'status' ? (sortBy.dir === 'asc' ? '↑' : '↓') : ''}</button>
@@ -216,7 +212,7 @@ export default function UI61_ServiceCatalog() {
               {pageItems.map((s) => (
                 <li key={s.id} className="p-3 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <input type="checkbox" checked={selected.has(s.id)} onChange={() => toggleSelect(s.id)} />
+                    <input type="checkbox" checked={selected.has(s.id)} onChange={() => toggleSelect(s.id)} aria-label={`Select ${s.name}`} />
                     <div>
                       <button onClick={() => setDrawerService(s)} className="text-sm font-medium text-left hover:underline">{s.name}</button>
                       <div className="text-xs text-gray-500">{s.id} · owner: {s.owner}</div>
@@ -226,8 +222,16 @@ export default function UI61_ServiceCatalog() {
                   <div className="flex items-center gap-4">
                     <div className={`text-sm ${s.status === 'Healthy' ? 'text-green-600' : s.status === 'Degraded' ? 'text-yellow-600' : 'text-red-600'}`}>{s.status}</div>
                     <div className="text-xs text-gray-500">{new Date(s.lastCheckedAt).toLocaleString()}</div>
+                    <div className="w-24 h-8">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={s.usage} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                          <Tooltip />
+                          <Area type="monotone" dataKey="v" stroke="#60A5FA" fill="#60A5FA" />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
                     <div>
-                      <button onClick={() => exportJSON(s, `${s.id}.json`)} className="px-2 py-1 bg-gray-100 rounded">Export</button>
+                      <Button onClick={() => exportJSON(s, `${s.id}.json`)}>Export</Button>
                     </div>
                   </div>
                 </li>
@@ -242,9 +246,9 @@ export default function UI61_ServiceCatalog() {
           <div className="p-3 border-t flex items-center justify-between">
             <div className="text-sm text-gray-600">Showing {Math.min((page - 1) * pageSize + 1, visibleServices.length)}–{Math.min(page * pageSize, visibleServices.length)} of {visibleServices.length}</div>
             <div className="flex items-center gap-2">
-              <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1} className={`px-2 py-1 rounded ${page === 1 ? 'bg-gray-100 text-gray-400' : 'bg-gray-200'}`}>Prev</button>
+              <Button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>Prev</Button>
               <div className="px-2">{page} / {totalPages}</div>
-              <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages} className={`px-2 py-1 rounded ${page === totalPages ? 'bg-gray-100 text-gray-400' : 'bg-gray-200'}`}>Next</button>
+              <Button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages}>Next</Button>
             </div>
           </div>
         </div>
@@ -260,8 +264,8 @@ export default function UI61_ServiceCatalog() {
                 <div className="text-xs text-gray-500">{drawerService.id}</div>
               </div>
               <div className="flex gap-2">
-                <button onClick={() => navigator.clipboard?.writeText(drawerService.id)} className="px-2 py-1 bg-gray-100 rounded">Copy ID</button>
-                <button onClick={() => setDrawerService(null)} className="px-2 py-1 bg-gray-100 rounded">Close</button>
+                <Button onClick={() => navigator.clipboard?.writeText(drawerService.id)}>Copy ID</Button>
+                <Button onClick={() => setDrawerService(null)}>Close</Button>
               </div>
             </div>
 
@@ -277,8 +281,8 @@ export default function UI61_ServiceCatalog() {
               </div>
 
               <div className="mt-4 flex gap-2">
-                <button onClick={() => exportJSON(drawerService, `${drawerService.id}.json`)} className="px-3 py-2 bg-blue-600 text-white rounded">Export</button>
-                <button onClick={() => { setSelected((s) => new Set(s).add(drawerService.id)); }} className="px-3 py-2 bg-green-100 rounded">Select</button>
+                <Button onClick={() => exportJSON(drawerService, `${drawerService.id}.json`)} variant="primary">Export</Button>
+                <Button onClick={() => { setSelected((s) => new Set(s).add(drawerService.id)); }}>Select</Button>
               </div>
             </div>
           </div>

@@ -228,11 +228,11 @@ export default function UI24_WarehouseWMS(){
                   <div className="h-56">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={occupancy.slice(0,40)}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e6e7eb" />
                         <XAxis dataKey="bin" hide />
-                        <YAxis stroke="#a1a1aa"/>
-                        <Tooltip contentStyle={{ background: "#09090b", border: "1px solid #27272a" }} />
-                        <Bar dataKey="occ" />
+                        <YAxis stroke="#6b7280" />
+                        <Tooltip contentStyle={{ background: "#ffffff", border: "1px solid #e5e7eb", color: "#111827" }} />
+                        <Bar dataKey="occ" fill="#2563eb" />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>

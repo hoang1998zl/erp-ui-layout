@@ -94,7 +94,7 @@ function DemoMode() {
   
   return (
     <div className="min-h-screen bg-neutral-50">
-      <div className="sticky top-0 z-40 border-b bg-white/90 backdrop-blur border-neutral-200">
+      <div className="sticky top-0 left-0 z-40 border-b bg-white/90 backdrop-blur border-neutral-200">
         <div className="px-4 py-3 mx-auto max-w-7xl">
           <div className="flex items-center gap-3 mb-3">
             <div className="text-lg font-bold">ERP UI Layout Demo</div>

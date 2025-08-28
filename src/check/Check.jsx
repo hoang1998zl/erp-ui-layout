@@ -36,6 +36,11 @@ import UI28_VendorManagement360 from "./ui-20/UI28_VendorManagement360.jsx";
 import UI29_InventoryOptimization from "./ui-20/UI29_InventoryOptimization.jsx";
 // // UI-30 Series
 import UI30_ProcessOrchestration from "./ui-30/UI30_ProcessOrchestration.jsx";
+import UI31_WorkflowBuilder from "./ui-30/UI31_WorkflowBuilder.jsx";
+import UI32_RPAStudio from "./ui-30/UI32_RPAStudio.jsx";
+import UI33_RulesEngine from "./ui-30/UI33_RulesEngine.jsx";
+import UI34_DocGenTemplate from "./ui-30/UI34_DocGenTemplate.jsx";
+import UI35_DataPipelines from "./ui-30/UI35_DataPipelines.jsx";
 // UI-40 Series
 import UI40_DataGovernance from "./ui-40/UI40_DataGovernance.jsx";
 import UI41_SecurityOps from "./ui-40/UI41_SecurityOps.jsx";
@@ -43,27 +48,70 @@ import UI42_AuditTrailExplorer from "./ui-40/UI42_AuditTrailExplorer.jsx";
 import UI43_DataCatalog from "./ui-40/UI43_DataCatalog.jsx";
 import UI44_DataQuality from "./ui-40/UI44_DataQuality.jsx";
 import UI45_PrivacyCenter from "./ui-40/UI45_PrivacyCenter.jsx";
-import UI46_DataCatalogBrowser from "./ui-40/UI46_DataCatalogBrowser";
-import UI47_DataLineage from "./ui-40/UI47_DataLineage";
-import UI48_CompliancePolicyManager from "./ui-40/UI48_CompliancePolicyManager";
-import UI49_ConsentAudit from "./ui-40/UI49_ConsentAudit";
+import UI46_DataCatalogBrowser from "./ui-40/UI46_DataCatalogBrowser.jsx";
+import UI47_DataLineage from "./ui-40/UI47_DataLineage.jsx";
+import UI48_CompliancePolicyManager from "./ui-40/UI48_CompliancePolicyManager.jsx";
+import UI49_ConsentAudit from "./ui-40/UI49_ConsentAudit.jsx";
 
 /* UI-50 Series */
 import UI50_AIWorkbench from "./ui-50/UI50_AIWorkbench.jsx";
 import UI51_AgentOrchestrator from "./ui-50/UI51_AgentOrchestrator.jsx";
 import UI52_GenerativeStudio from "./ui-50/UI52_GenerativeStudio.jsx";
-import UI53_ModelMonitoring from "./ui-50/UI53_ModelMonitoring";
-import UI54_ConversationDesigner from "./ui-50/UI54_ConversationDesigner";
-import UI55_MLOpsDashboard from "./ui-50/UI55_MLOpsDashboard";
-import UI56_ModelExplainability from "./ui-50/UI56_ModelExplainability";
-import UI57_DatasetCatalog from "./ui-50/UI57_DatasetCatalog";
-import UI58_FeatureStoreBrowser from "./ui-50/UI58_FeatureStoreBrowser";
-import UI59_ExperimentTracker from "./ui-50/UI59_ExperimentTracker";
+import UI53_ModelMonitoring from "./ui-50/UI53_ModelMonitoring.jsx";
+import UI54_ConversationDesigner from "./ui-50/UI54_ConversationDesigner.jsx";
+import UI55_MLOpsDashboard from "./ui-50/UI55_MLOpsDashboard.jsx";
+import UI56_ModelExplainability from "./ui-50/UI56_ModelExplainability.jsx";
+import UI57_DatasetCatalog from "./ui-50/UI57_DatasetCatalog.jsx";
+import UI58_FeatureStoreBrowser from "./ui-50/UI58_FeatureStoreBrowser.jsx";
+import UI59_ExperimentTracker from "./ui-50/UI59_ExperimentTracker.jsx";
 
 /* UI-60 Series */
-import UI60_PipelineMonitor from "./ui-60/UI60_PipelineMonitor";
-import UI61_ServiceCatalog from "./ui-60/UI61_ServiceCatalog";
-import UI62_SecretsManagerUI from "./ui-60/UI62_SecretsManagerUI";
+import UI60_PipelineMonitor from "./ui-60/UI60_PipelineMonitor.jsx";
+import UI61_ServiceCatalog from "./ui-60/UI61_ServiceCatalog.jsx";
+import UI62_SecretsManagerUI from "./ui-60/UI62_SecretsManagerUI.jsx";
+import UI63_EnvironmentalMetrics from "./ui-60/UI63_EnvironmentalMetrics.jsx";
+import UI64_RESTDataCollector from "./ui-60/UI64_RESTDataCollector.jsx";
+import UI65_SustainabilityReport from "./ui-60/UI65_SustainabilityReport.jsx";
+import UI66_ComplianceSustainability from "./ui-60/UI66_ComplianceSustainability.jsx";
+import UI67_CommunityImpact from "./ui-60/UI67_CommunityImpact.jsx";
+import UI68_HSECommandCenter from "./ui-60/UI68_HSECommandCenter.jsx";
+import UI69_EthicalSourcing from "./ui-60/UI69_EthicalSourcing.jsx";
+
+/* UI-70 Series */
+import UI70_GovernanceTracker from "./ui-70/UI70_GovernanceTracker.jsx";
+import UI71_AIChatOps from "./ui-70/UI71_AIChatOps.jsx";
+import UI72_AIAssistantFinance from "./ui-70/UI72_AIAssistantFinance.jsx";
+import UI73_SmartRecruitment from "./ui-70/UI73_SmartRecruitment.jsx";
+import UI74_DocumentAI from "./ui-70/UI74_DocumentAI.jsx";
+import UI75_RPABotMonitor from "./ui-70/UI75_RPABotMonitor.jsx";
+import UI76_AIQualityControl from "./ui-70/UI76_AIQualityControl.jsx";
+import UI77_ForecastAI from "./ui-70/UI77_ForecastAI.jsx";
+import UI78_AIRiskScoring from "./ui-70/UI78_AIRiskScoring.jsx";
+import UI79_NLPPolicyCenter from "./ui-70/UI79_NLPPolicyCenter.jsx";
+
+/* UI-80 Series */
+import UI80_AIWorkflowDesigner from "./ui-80/UI80_AIWorkflowDesigner.jsx";
+import UI81_PeopleAnalytics from "./ui-80/UI81_PeopleAnalytics.jsx";
+import UI82_LearningHub from "./ui-80/UI82_LearningHub.jsx";
+import UI83_EngagementSurvey from "./ui-80/UI83_EngagementSurvey.jsx";
+import UI84_SkillsMatrix from "./ui-80/UI84_SkillsMatrix.jsx";
+import UI85_ShiftScheduling from "./ui-80/UI85_ShiftScheduling.jsx";
+import UI86_TalentSuccession from "./ui-80/UI86_TalentSuccession.jsx";
+import UI87_CollaborationSpaces from "./ui-80/UI87_CollaborationSpaces.jsx";
+import UI88_KnowledgeGraph from "./ui-80/UI88_KnowledgeGraph.jsx";
+import UI89_EventPlanner from "./ui-80/UI89_EventPlanner.jsx";
+
+/* UI-90 Series */
+import UI90_WellbeingDashboard from "./ui-90/UI90_WellbeingDashboard.jsx";
+import UI91_CustomerPortal from "./ui-90/UI91_CustomerPortal.jsx";
+import UI92_SupplierPortalLite from "./ui-90/UI92_SupplierPortalLite.jsx";
+import UI93_FieldServiceApp from "./ui-90/UI93_FieldServiceApp.jsx";
+import UI94_IoTDeviceManager from "./ui-90/UI94_IoTDeviceManager.jsx";
+import UI95_GlobalTradeCompliance from "./ui-90/UI95_GlobalTradeCompliance.jsx";
+import UI96_LegalCaseManager from "./ui-90/UI96_LegalCaseManager.jsx";
+import UI97_PatentIPCenter from "./ui-90/UI97_PatentIPCenter.jsx";
+import UI98_ExpansionPlanner from "./ui-90/UI98_ExpansionPlanner.jsx";
+import UI99_FutureLab from "./ui-90/UI99_FutureLab.jsx";
 
 // Default Series - Complete ERP Components
 import AppShellFinal from "./default/app_shell_final_v_0.jsx";
@@ -327,6 +375,46 @@ const __SidebarLinks = () => (
         UI30_ProcessOrchestration
       </Link>
     </div>
+    <div>
+      <Link
+        to="/check/ui31_workflowbuilder"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI31_WorkflowBuilder
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui32_rpastudio"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI32_RPAStudio
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui33_rulesengine"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI33_RulesEngine
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui34_docgentemplate"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI34_DocGenTemplate
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui35_datapipelines"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI35_DataPipelines
+      </Link>
+    </div>
 
     {/* UI-40 Series */}
     <div>
@@ -517,8 +605,310 @@ const __SidebarLinks = () => (
         UI62_SecretsManagerUI
       </Link>
     </div>
+    <div>
+      <Link
+        to="/check/ui63_environmentalmetrics"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI63_EnvironmentalMetrics
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui64_restdatacollector"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI64_RESTDataCollector
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui65_sustainabilityreport"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI65_SustainabilityReport
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui66_compliancesustainability"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI66_ComplianceSustainability
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui67_communityimpact"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI67_CommunityImpact
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui68_hsecommandcenter"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI68_HSECommandCenter
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui69_ethicalsourcing"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI69_EthicalSourcing
+      </Link>
+    </div>
 
-    {/* Default Series - Complete ERP Components */}
+    {/* UI-70 Series */}
+    <div>
+      <Link
+        to="/check/ui70_governancetracker"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI70_GovernanceTracker
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui71_aichatops"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI71_AIChatOps
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui72_aiassistantfinance"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI72_AIAssistantFinance
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui73_smartrecruitment"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI73_SmartRecruitment
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui74_documentai"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI74_DocumentAI
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui75_rpabotmonitor"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI75_RPABotMonitor
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui76_aiqualitycontrol"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI76_AIQualityControl
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui77_forecastai"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI77_ForecastAI
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui78_airiskscoring"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI78_AIRiskScoring
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui79_nlppolicycenter"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI79_NLPPolicyCenter
+      </Link>
+    </div>
+
+    {/* UI-80 Series */}
+    <div>
+      <Link
+        to="/check/ui80_aiworkflowdesigner"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI80_AIWorkflowDesigner
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui81_peopleanalytics"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI81_PeopleAnalytics
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui82_learninghub"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI82_LearningHub
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui83_engagementsurvey"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI83_EngagementSurvey
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui84_skillsmatrix"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI84_SkillsMatrix
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui85_shiftscheduling"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI85_ShiftScheduling
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui86_talentsuccession"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI86_TalentSuccession
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui87_collaborationspaces"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI87_CollaborationSpaces
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui88_knowledgegraph"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI88_KnowledgeGraph
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui89_eventplanner"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI89_EventPlanner
+      </Link>
+    </div>
+
+    {/* UI-90 Series */}
+    <div>
+      <Link
+        to="/check/ui90_wellbeingdashboard"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI90_WellbeingDashboard
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui91_customerportal"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI91_CustomerPortal
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui92_supplierportallite"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI92_SupplierPortalLite
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui93_fieldserviceapp"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI93_FieldServiceApp
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui94_iotdevicemanager"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI94_IoTDeviceManager
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui95_globaltradecompliance"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI95_GlobalTradeCompliance
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui96_legalcasemanager"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI96_LegalCaseManager
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui97_patentipcenter"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI97_PatentIPCenter
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui98_expansionplanner"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI98_ExpansionPlanner
+      </Link>
+    </div>
+    <div>
+      <Link
+        to="/check/ui99_futurelab"
+        className="block p-2 rounded hover:bg-gray-100"
+      >
+        UI99_FutureLab
+      </Link>
+    </div>
+
+    {/* Default ERP Components */}
     <div className="pt-2 mt-4 border-t border-gray-200">
       <h4 className="mb-2 text-xs font-semibold text-gray-500 uppercase">
         Default ERP Components
@@ -615,7 +1005,7 @@ export default function Check() {
   return (
     <div className="relative min-h-screen bg-gray-50">
       {/* Header with back button */}
-      <div className="sticky top-0 z-30 flex items-center justify-between px-4 h-[54px] py-3 bg-white border-b border-gray-200">
+      <div className="sticky top-0 left-0 z-30 flex items-center justify-between px-4 h-[54px] py-3 bg-white border-b border-gray-200">
         <div className="flex items-center gap-3">
           <Link to="/" className="text-sm text-blue-600 hover:text-blue-800">
             ← Back to Home
@@ -720,6 +1110,20 @@ export default function Check() {
               path="/ui30_processorchestration"
               element={<UI30_ProcessOrchestration />}
             />
+            <Route
+              path="/ui31_workflowbuilder"
+              element={<UI31_WorkflowBuilder />}
+            />
+            <Route path="/ui32_rpastudio" element={<UI32_RPAStudio />} />
+            <Route path="/ui33_rulesengine" element={<UI33_RulesEngine />} />
+            <Route
+              path="/ui34_docgentemplate"
+              element={<UI34_DocGenTemplate />}
+            />
+            <Route
+              path="/ui35_datapipelines"
+              element={<UI35_DataPipelines />}
+            />
 
             {/* UI-40 Series */}
             <Route
@@ -787,7 +1191,7 @@ export default function Check() {
               element={<UI59_ExperimentTracker />}
             />
 
-            {/* UI-60 Series */}
+            {/* UI-60 Series (grouped) */}
             <Route
               path="/ui60_pipelinemonitor"
               element={<UI60_PipelineMonitor />}
@@ -800,6 +1204,139 @@ export default function Check() {
               path="/ui62_secretsmanagerui"
               element={<UI62_SecretsManagerUI />}
             />
+            <Route
+              path="/ui63_environmentalmetrics"
+              element={<UI63_EnvironmentalMetrics />}
+            />
+            <Route
+              path="/ui64_restdatacollector"
+              element={<UI64_RESTDataCollector />}
+            />
+            <Route
+              path="/ui65_sustainabilityreport"
+              element={<UI65_SustainabilityReport />}
+            />
+            <Route
+              path="/ui66_compliancesustainability"
+              element={<UI66_ComplianceSustainability />}
+            />
+            <Route
+              path="/ui67_communityimpact"
+              element={<UI67_CommunityImpact />}
+            />
+            <Route
+              path="/ui68_hsecommandcenter"
+              element={<UI68_HSECommandCenter />}
+            />
+            <Route
+              path="/ui69_ethicalsourcing"
+              element={<UI69_EthicalSourcing />}
+            />
+
+            {/* UI-70 Series (grouped) */}
+            <Route
+              path="/ui70_governancetracker"
+              element={<UI70_GovernanceTracker />}
+            />
+            <Route path="/ui71_aichatops" element={<UI71_AIChatOps />} />
+            <Route
+              path="/ui72_aiassistantfinance"
+              element={<UI72_AIAssistantFinance />}
+            />
+            <Route
+              path="/ui73_smartrecruitment"
+              element={<UI73_SmartRecruitment />}
+            />
+            <Route path="/ui74_documentai" element={<UI74_DocumentAI />} />
+            <Route
+              path="/ui75_rpabotmonitor"
+              element={<UI75_RPABotMonitor />}
+            />
+            <Route
+              path="/ui76_aiqualitycontrol"
+              element={<UI76_AIQualityControl />}
+            />
+            <Route path="/ui77_forecastai" element={<UI77_ForecastAI />} />
+            <Route
+              path="/ui78_airiskscoring"
+              element={<UI78_AIRiskScoring />}
+            />
+            <Route
+              path="/ui79_nlppolicycenter"
+              element={<UI79_NLPPolicyCenter />}
+            />
+
+            {/* UI-80 Series (grouped) */}
+            <Route
+              path="/ui80_aiworkflowdesigner"
+              element={<UI80_AIWorkflowDesigner />}
+            />
+            <Route
+              path="/ui81_peopleanalytics"
+              element={<UI81_PeopleAnalytics />}
+            />
+            <Route path="/ui82_learninghub" element={<UI82_LearningHub />} />
+            <Route
+              path="/ui83_engagementsurvey"
+              element={<UI83_EngagementSurvey />}
+            />
+            <Route path="/ui84_skillsmatrix" element={<UI84_SkillsMatrix />} />
+            <Route
+              path="/ui85_shiftscheduling"
+              element={<UI85_ShiftScheduling />}
+            />
+            <Route
+              path="/ui86_talentsuccession"
+              element={<UI86_TalentSuccession />}
+            />
+            <Route
+              path="/ui87_collaborationspaces"
+              element={<UI87_CollaborationSpaces />}
+            />
+            <Route
+              path="/ui88_knowledgegraph"
+              element={<UI88_KnowledgeGraph />}
+            />
+            <Route path="/ui89_eventplanner" element={<UI89_EventPlanner />} />
+
+            {/* UI-90 Series (grouped) */}
+            <Route
+              path="/ui90_wellbeingdashboard"
+              element={<UI90_WellbeingDashboard />}
+            />
+            <Route
+              path="/ui91_customerportal"
+              element={<UI91_CustomerPortal />}
+            />
+            <Route
+              path="/ui92_supplierportallite"
+              element={<UI92_SupplierPortalLite />}
+            />
+            <Route
+              path="/ui93_fieldserviceapp"
+              element={<UI93_FieldServiceApp />}
+            />
+            <Route
+              path="/ui94_iotdevicemanager"
+              element={<UI94_IoTDeviceManager />}
+            />
+            <Route
+              path="/ui95_globaltradecompliance"
+              element={<UI95_GlobalTradeCompliance />}
+            />
+            <Route
+              path="/ui96_legalcasemanager"
+              element={<UI96_LegalCaseManager />}
+            />
+            <Route
+              path="/ui97_patentipcenter"
+              element={<UI97_PatentIPCenter />}
+            />
+            <Route
+              path="/ui98_expansionplanner"
+              element={<UI98_ExpansionPlanner />}
+            />
+            <Route path="/ui99_futurelab" element={<UI99_FutureLab />} />
 
             {/* Default Series Routes */}
             <Route path="/app_shell_final" element={<AppShellFinal />} />

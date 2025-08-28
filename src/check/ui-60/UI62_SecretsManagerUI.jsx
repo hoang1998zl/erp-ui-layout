@@ -7,10 +7,10 @@ export default function UI62_SecretsManagerUI() {
 
   const initialSecrets = useMemo(
     () => [
-      { id: "s-2001", name: "db/password", type: "credential", environment: "prod", owner: "infra-team", createdAt: "2025-06-10" },
-      { id: "s-2002", name: "api/key/payment", type: "api-key", environment: "staging", owner: "payments", createdAt: "2025-07-15" },
-      { id: "s-2003", name: "oauth/client_secret", type: "credential", environment: "prod", owner: "auth", createdAt: "2025-08-01" },
-      { id: "s-2004", name: "smtp/password", type: "credential", environment: "dev", owner: "comm", createdAt: "2025-08-12" },
+      { id: "s-2001", name: "db/password", type: "credential", environment: "prod", owner: "infra-team", createdAt: "2025-06-10", masked: true },
+      { id: "s-2002", name: "api/key/payment", type: "api-key", environment: "staging", owner: "payments", createdAt: "2025-07-15", masked: true },
+      { id: "s-2003", name: "oauth/client_secret", type: "credential", environment: "prod", owner: "auth", createdAt: "2025-08-01", masked: true },
+      { id: "s-2004", name: "smtp/password", type: "credential", environment: "dev", owner: "comm", createdAt: "2025-08-12", masked: true },
       // ... add more mock rows if desired
     ],
     []
@@ -29,6 +29,20 @@ export default function UI62_SecretsManagerUI() {
   // detail drawer
   const [detail, setDetail] = useState(null);
   const [detailTab, setDetailTab] = useState("overview");
+
+  // revealed secrets (store actual values in map when revealed or rotated)
+  const [revealedValues, setRevealedValues] = useState({});
+
+  // audit logs: { secretId: [{ts, action, by, note}] }
+  const [auditLogs, setAuditLogs] = useState({});
+
+  // simple toasts
+  const [toasts, setToasts] = useState([]);
+  const pushToast = (msg, opts = {}) => {
+    const id = Date.now() + Math.random();
+    setToasts((t) => [...t, { id, msg, ...opts }]);
+    setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), opts.duration || 3000);
+  };
 
   const mockFetch = (shouldFail = false) =>
     new Promise((resolve, reject) =>
@@ -173,6 +187,113 @@ export default function UI62_SecretsManagerUI() {
     );
   };
 
+  // mock secrets value fetch
+  const mockGetSecretValue = (id) => new Promise((resolve) => {
+    setTimeout(() => resolve(`value-${id}-${Math.random().toString(36).slice(2, 8)}`), 200);
+  });
+
+  const revealSecret = async (id) => {
+    if (revealedValues[id]) return; // already revealed
+    try {
+      pushToast(`Revealing secret ${id}`);
+      const val = await mockGetSecretValue(id);
+      setRevealedValues((r) => ({ ...r, [id]: val }));
+      // add audit log
+      setAuditLogs((a) => ({ ...a, [id]: [...(a[id] || []), { ts: new Date().toISOString(), action: 'reveal', by: 'mock-user' }] }));
+    } catch (err) {
+      pushToast(`Failed to reveal ${id}`);
+    }
+  };
+
+  const hideSecret = (id) => {
+    setRevealedValues((r) => {
+      const copy = { ...r };
+      delete copy[id];
+      return copy;
+    });
+    setAuditLogs((a) => ({ ...a, [id]: [...(a[id] || []), { ts: new Date().toISOString(), action: 'hide', by: 'mock-user' }] }));
+    pushToast(`Hidden secret ${id}`);
+  };
+
+  const mockRotateSecret = (id) => new Promise((resolve) => {
+    setTimeout(() => resolve(`rotated-${id}-${Math.random().toString(36).slice(2, 10)}`), 300);
+  });
+
+  const rotateSecret = async (id) => {
+    pushToast(`Rotating secret ${id}`);
+    try {
+      const newVal = await mockRotateSecret(id);
+      setRevealedValues((r) => ({ ...r, [id]: newVal }));
+      setAuditLogs((a) => ({ ...a, [id]: [...(a[id] || []), { ts: new Date().toISOString(), action: 'rotate', by: 'mock-user', note: 'rotated via UI' }] }));
+      pushToast(`Secret ${id} rotated`);
+    } catch (err) {
+      pushToast(`Failed to rotate ${id}`);
+    }
+  };
+
+  // bulk copy (copies actual values; will reveal if needed)
+  const bulkCopyValues = async () => {
+    const selected = secrets.filter((s) => selectedIds.has(s.id));
+    if (selected.length === 0) return pushToast('No secrets selected to copy');
+    // ensure values
+    const values = {};
+    for (const s of selected) {
+      if (!revealedValues[s.id]) {
+        // fetch a mock value (simulate secret fetch)
+        // do sequential for simplicity
+        // eslint-disable-next-line no-await-in-loop
+        const v = await mockGetSecretValue(s.id);
+        setRevealedValues((r) => ({ ...r, [s.id]: v }));
+        setAuditLogs((a) => ({ ...a, [s.id]: [...(a[s.id] || []), { ts: new Date().toISOString(), action: 'reveal (bulk)', by: 'mock-user' }] }));
+        values[s.id] = v;
+      } else values[s.id] = revealedValues[s.id];
+    }
+
+    const text = selected.map((s) => `${s.id}: ${values[s.id]}`).join('\n');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+      pushToast(`Copied ${selected.length} secret values to clipboard`);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      pushToast(`Copied ${selected.length} secret values to clipboard`);
+    }
+  };
+
+  const bulkDownloadValuesJSON = async () => {
+    const selected = secrets.filter((s) => selectedIds.has(s.id));
+    if (selected.length === 0) return pushToast('No secrets selected to download');
+    const payload = { exportedAt: new Date().toISOString(), secrets: [] };
+    for (const s of selected) {
+      if (!revealedValues[s.id]) {
+        // eslint-disable-next-line no-await-in-loop
+        const v = await mockGetSecretValue(s.id);
+        setRevealedValues((r) => ({ ...r, [s.id]: v }));
+        setAuditLogs((a) => ({ ...a, [s.id]: [...(a[s.id] || []), { ts: new Date().toISOString(), action: 'reveal (download)', by: 'mock-user' }] }));
+        payload.secrets.push({ ...s, value: v });
+      } else payload.secrets.push({ ...s, value: revealedValues[s.id] });
+    }
+    exportJSON(payload, `secrets_values_${new Date().toISOString()}.json`);
+    pushToast(`Downloaded ${selected.length} secrets (with values)`);
+  };
+
+  // export helpers preserving existing ones
+  const exportSelectedWithValues = () => {
+    const selected = secrets.filter((s) => selectedIds.has(s.id));
+    const payload = selected.map((s) => ({ ...s, value: revealedValues[s.id] ? revealedValues[s.id] : '***masked***' }));
+    exportJSON({ exportedAt: new Date().toISOString(), count: payload.length, secrets: payload }, `secrets_selected_values_${new Date().toISOString()}.json`);
+  };
+
+  // detail drawer helpers
+  const viewAudit = (id) => {
+    setDetail(secrets.find((s) => s.id === id));
+    setDetailTab('audit');
+  };
+
   return (
     <div className="p-6">
       <header className="mb-4">
@@ -183,6 +304,7 @@ export default function UI62_SecretsManagerUI() {
       <div className="p-4 mb-4 bg-white rounded shadow-sm">
         <div className="flex items-center gap-3 mb-3">
           <input
+            aria-label="Search secrets"
             className="flex-1 p-2 border rounded"
             placeholder="Search by name, id, owner, or environment"
             value={query}
@@ -190,18 +312,23 @@ export default function UI62_SecretsManagerUI() {
           />
 
           <div className="flex gap-2">
-            <button onClick={() => fetchSecrets()} className="px-3 py-1 bg-gray-100 rounded">Refresh</button>
-            <button onClick={() => fetchSecrets({ fail: true })} className="px-3 py-1 text-red-700 bg-red-100 rounded">Simulate Error</button>
+            <button aria-label="Refresh secrets" onClick={() => fetchSecrets()} className="px-3 py-1 bg-gray-100 rounded">Refresh</button>
+            <button aria-label="Simulate error" onClick={() => fetchSecrets({ fail: true })} className="px-3 py-1 text-red-700 bg-red-100 rounded">Simulate Error</button>
 
             <div className="relative inline-flex">
-              <button onClick={selectAllPage} className="px-3 py-1 bg-gray-100 rounded">Select page</button>
-              <button onClick={selectAllMatching} className="px-3 py-1 bg-gray-100 rounded">Select all matching</button>
-              <button onClick={clearSelection} className="px-3 py-1 bg-gray-100 rounded">Clear</button>
+              <button aria-label="Select page" onClick={selectAllPage} className="px-3 py-1 bg-gray-100 rounded">Select page</button>
+              <button aria-label="Select all matching" onClick={selectAllMatching} className="px-3 py-1 bg-gray-100 rounded">Select all matching</button>
+              <button aria-label="Clear selection" onClick={clearSelection} className="px-3 py-1 bg-gray-100 rounded">Clear</button>
             </div>
 
-            <button onClick={exportSelected} className="px-3 py-1 text-white bg-blue-600 rounded">Export JSON</button>
-            <button onClick={exportSelectedCSV} className="px-3 py-1 text-white bg-green-600 rounded">Export CSV</button>
-            <button onClick={exportAll} className="px-3 py-1 bg-gray-100 rounded">Export all JSON</button>
+            <button aria-label="Export selected JSON" onClick={exportSelected} className="px-3 py-1 text-white bg-blue-600 rounded">Export JSON</button>
+            <button aria-label="Export selected CSV" onClick={exportSelectedCSV} className="px-3 py-1 text-white bg-green-600 rounded">Export CSV</button>
+            <button aria-label="Export all JSON" onClick={exportAll} className="px-3 py-1 bg-gray-100 rounded">Export all JSON</button>
+
+            <div className="ml-2 inline-flex">
+              <button aria-label="Bulk copy values" onClick={bulkCopyValues} className="px-3 py-1 bg-indigo-600 text-white rounded">Copy values</button>
+              <button aria-label="Bulk download values" onClick={bulkDownloadValuesJSON} className="px-3 py-1 bg-indigo-100 rounded">Download values</button>
+            </div>
           </div>
         </div>
 
@@ -229,6 +356,7 @@ export default function UI62_SecretsManagerUI() {
                 <tr className="text-xs text-gray-500">
                   <th className="p-2">
                     <input
+                      aria-label="Select all on page"
                       type="checkbox"
                       checked={paginated.length > 0 && paginated.every(s => selectedIds.has(s.id))}
                       onChange={(e) => e.target.checked ? selectAllPage() : clearSelection()}
@@ -239,25 +367,47 @@ export default function UI62_SecretsManagerUI() {
                   <th className="p-2 cursor-pointer" onClick={() => toggleSort('type')}>Type</th>
                   <th className="p-2 cursor-pointer" onClick={() => toggleSort('environment')}>Environment</th>
                   <th className="p-2 cursor-pointer" onClick={() => toggleSort('owner')}>Owner</th>
+                  <th className="p-2">Value</th>
                   <th className="p-2 cursor-pointer" onClick={() => toggleSort('createdAt')}>Created {sortBy.field === 'createdAt' ? (sortBy.dir === 'asc' ? '▲' : '▼') : ''}</th>
+                  <th className="p-2">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {paginated.map((s) => (
-                  <tr key={s.id} className="border-t cursor-pointer hover:bg-gray-50" onClick={(e) => { if ((e.target && e.target.type) !== 'checkbox') openDetail(s); }}>
-                    <td className="p-2"><input type="checkbox" checked={selectedIds.has(s.id)} onChange={() => toggleSelect(s.id)} onClick={(e) => e.stopPropagation()} /></td>
-                    <td className="p-2">{highlightText(s.id, debouncedQuery)}</td>
-                    <td className="p-2">{highlightText(s.name, debouncedQuery)}</td>
-                    <td className="p-2">{s.type}</td>
-                    <td className="p-2">{highlightText(s.environment, debouncedQuery)}</td>
-                    <td className="p-2">{highlightText(s.owner, debouncedQuery)}</td>
-                    <td className="p-2">{s.createdAt}</td>
+                  <tr key={s.id} className="border-t hover:bg-gray-50">
+                    <td className="p-2"><input aria-label={`Select ${s.id}`} type="checkbox" checked={selectedIds.has(s.id)} onChange={() => toggleSelect(s.id)} /></td>
+                    <td className="p-2" onClick={() => openDetail(s)}>{highlightText(s.id, debouncedQuery)}</td>
+                    <td className="p-2" onClick={() => openDetail(s)}>{highlightText(s.name, debouncedQuery)}</td>
+                    <td className="p-2" onClick={() => openDetail(s)}>{s.type}</td>
+                    <td className="p-2" onClick={() => openDetail(s)}>{highlightText(s.environment, debouncedQuery)}</td>
+                    <td className="p-2" onClick={() => openDetail(s)}>{highlightText(s.owner, debouncedQuery)}</td>
+                    <td className="p-2">
+                      {revealedValues[s.id] ? (
+                        <span className="font-mono text-xs">{revealedValues[s.id]}</span>
+                      ) : (
+                        <span className="font-mono text-xs text-gray-400">••••••••</span>
+                      )}
+                    </td>
+                    <td className="p-2" onClick={() => openDetail(s)}>{s.createdAt}</td>
+                    <td className="p-2">
+                      <div className="flex gap-2">
+                        {revealedValues[s.id] ? (
+                          <button aria-label={`Hide ${s.id}`} onClick={() => hideSecret(s.id)} className="px-2 py-1 bg-gray-100 rounded">Hide</button>
+                        ) : (
+                          <button aria-label={`Reveal ${s.id}`} onClick={() => revealSecret(s.id)} className="px-2 py-1 bg-yellow-100 rounded">Reveal</button>
+                        )}
+
+                        <button aria-label={`Rotate ${s.id}`} onClick={() => rotateSecret(s.id)} className="px-2 py-1 bg-blue-100 rounded">Rotate</button>
+                        <button aria-label={`Download ${s.id}`} onClick={() => exportJSON({ secret: s, value: revealedValues[s.id] ? revealedValues[s.id] : '***masked***' }, `${s.id}_value.json`)} className="px-2 py-1 bg-green-100 rounded">Download</button>
+                        <button aria-label={`View audit ${s.id}`} onClick={() => viewAudit(s.id)} className="px-2 py-1 bg-gray-100 rounded">Audit</button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
 
                 {paginated.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="p-4 text-gray-500">No secrets match the current filter.</td>
+                    <td colSpan={9} className="p-4 text-gray-500">No secrets match the current filter.</td>
                   </tr>
                 )}
               </tbody>
@@ -269,7 +419,7 @@ export default function UI62_SecretsManagerUI() {
                 <button onClick={() => setPage((p) => Math.max(1, p - 1))} className="px-2 py-1 bg-gray-100 rounded">Prev</button>
                 <span className="px-2">{page} / {pageCount}</span>
                 <button onClick={() => setPage((p) => Math.min(pageCount, p + 1))} className="px-2 py-1 bg-gray-100 rounded">Next</button>
-                <select value={pageSize} onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1); }} className="p-1 ml-2 border rounded">
+                <select aria-label="Page size" value={pageSize} onChange={(e) => { setPageSize(Number(e.target.value)); setPage(1); }} className="p-1 ml-2 border rounded">
                   <option value={5}>5 / page</option>
                   <option value={10}>10 / page</option>
                   <option value={25}>25 / page</option>
@@ -285,12 +435,12 @@ export default function UI62_SecretsManagerUI() {
       </div>
 
       <div className="mb-4 text-xs text-gray-500">
-        Note: This is a mock viewer for metadata only. Secrets values are intentionally omitted.
+        Note: This is a mock viewer for metadata only. Secrets values are intentionally omitted until revealed. Revealing or rotating is simulated and recorded in the audit log.
       </div>
 
       {/* detail drawer */}
       {detail && (
-        <div className="fixed right-0 top-0 h-full w-[420px] bg-white border-l shadow-lg z-50 flex flex-col">
+        <div className="fixed right-0 top-0 h-full w-[420px] bg-white border-l shadow-lg z-50 flex flex-col" role="dialog" aria-modal="true" aria-label={`Secret details ${detail.id}`}>
           <div className="flex items-center justify-between p-4 border-b">
             <div>
               <div className="text-lg font-semibold">{detail.name}</div>
@@ -305,6 +455,7 @@ export default function UI62_SecretsManagerUI() {
             <div className="flex gap-2 text-sm">
               <button onClick={() => setDetailTab('overview')} className={`px-2 py-1 rounded ${detailTab === 'overview' ? 'bg-gray-200' : ''}`}>Overview</button>
               <button onClick={() => setDetailTab('raw')} className={`px-2 py-1 rounded ${detailTab === 'raw' ? 'bg-gray-200' : ''}`}>Raw JSON</button>
+              <button onClick={() => setDetailTab('audit')} className={`px-2 py-1 rounded ${detailTab === 'audit' ? 'bg-gray-200' : ''}`}>Audit</button>
             </div>
           </div>
 
@@ -317,17 +468,60 @@ export default function UI62_SecretsManagerUI() {
                 <div><strong>Environment:</strong> {detail.environment}</div>
                 <div><strong>Owner:</strong> {detail.owner}</div>
                 <div><strong>Created:</strong> {detail.createdAt}</div>
+                <div>
+                  <strong>Value:</strong>
+                  <div className="mt-2">
+                    {revealedValues[detail.id] ? (
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono text-sm">{revealedValues[detail.id]}</span>
+                        <div className="flex gap-2">
+                          <button onClick={() => hideSecret(detail.id)} className="px-2 py-1 bg-gray-100 rounded">Hide</button>
+                          <button onClick={() => rotateSecret(detail.id)} className="px-2 py-1 bg-blue-100 rounded">Rotate</button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-sm text-gray-400">••••••••</span>
+                        <button onClick={() => revealSecret(detail.id)} className="px-2 py-1 bg-yellow-100 rounded">Reveal</button>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
-            ) : (
+            ) : detailTab === 'raw' ? (
               <pre className="p-2 overflow-auto text-xs rounded bg-gray-50">{JSON.stringify(detail, null, 2)}</pre>
+            ) : (
+              <div className="text-sm">
+                <div className="mb-2"><strong>Audit log for {detail.id}</strong></div>
+                <div className="max-h-64 overflow-auto text-xs bg-gray-50 p-2 rounded">
+                  {(auditLogs[detail.id] || []).slice().reverse().map((a, i) => (
+                    <div key={i} className="border-b py-1">
+                      <div className="text-xs text-gray-600">{a.ts} — <strong>{a.action}</strong> by {a.by}</div>
+                      {a.note && <div className="text-xs text-gray-500">Note: {a.note}</div>}
+                    </div>
+                  ))}
+                  {(auditLogs[detail.id] || []).length === 0 && <div className="text-gray-500">No audit activity yet.</div>}
+                </div>
+                <div className="mt-3 text-right">
+                  <button onClick={() => { exportJSON({ id: detail.id, audit: auditLogs[detail.id] || [] }, `${detail.id}_audit.json`); pushToast('Audit exported'); }} className="px-2 py-1 bg-gray-100 rounded">Export audit</button>
+                </div>
+              </div>
             )
           }</div>
 
           <div className="p-3 text-right border-t">
-            <button onClick={() => { navigator.clipboard?.writeText(JSON.stringify(detail)); }} className="px-3 py-1 bg-gray-100 rounded">Copy JSON</button>
+            <button onClick={() => { navigator.clipboard?.writeText(JSON.stringify(detail)); pushToast('Copied JSON to clipboard'); }} className="px-3 py-1 bg-gray-100 rounded">Copy JSON</button>
           </div>
         </div>
       )}
+
+      {/* toasts */}
+      <div className="fixed right-4 bottom-4 space-y-2 z-60">
+        {toasts.map((t) => (
+          <div key={t.id} role="status" className="px-3 py-2 bg-black text-white text-sm rounded shadow">{t.msg}</div>
+        ))}
+      </div>
+
     </div>
   );
 }
