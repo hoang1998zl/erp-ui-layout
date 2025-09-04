@@ -116,6 +116,12 @@ import UI99_FutureLab from "./ui-90/UI99_FutureLab.jsx";
 // Default Series - Complete ERP Components
 import AppShellFinal from "./default/app_shell_final_v_0.jsx";
 import AuthGatewayFinal from "./default/auth_gateway_final_v_0.jsx";
+import CEOInitialSetup from "./default/ceo_initial_setup.jsx";
+import CEOInitialSetupWizard from "./default/Ceo_Initial_Setup_Wizard.jsx";
+import CEOSetupMatrix from "./default/CEO_Setup_Matrix.jsx";
+import DelegationOverrides from "./default/DelegationOverrides.jsx";
+import ERPAppShell from "./default/erp_app_shell.jsx";
+import ERPOsWireframes from "./default/Erp_Os_Wireframes.jsx";
 import FirstRunWizard from "./default/first_run_wizard_v_0.jsx";
 import ERPEntryOrchestrator from "./default/erp_entry_orchestrator_v_0.jsx";
 import UI00CEOFinal from "./default/ui_00_ceo_final_v_0.jsx";
@@ -932,10 +938,58 @@ const __SidebarLinks = () => (
       </div>
       <div>
         <Link
+          to="/check/ceo_initial_setup"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          CEO Initial Setup
+        </Link>
+      </div>
+      <div>
+        <Link
+          to="/check/ceo_setup_matrix"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          CEO Setup Matrix
+        </Link>
+      </div>
+      <div>
+        <Link
+          to="/check/ceo_initial_setup_wizard"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          CEO Initial Setup Wizard
+        </Link>
+      </div>
+      <div>
+        <Link
           to="/check/first_run_wizard"
           className="block p-2 rounded hover:bg-gray-100"
         >
           First Run Wizard
+        </Link>
+      </div>
+      <div>
+        <Link
+          to="/check/delegation_overrides"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          Delegation Overrides
+        </Link>
+      </div>
+      <div>
+        <Link
+          to="/check/erp_app_shell"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          ERP App Shell
+        </Link>
+      </div>
+      <div>
+        <Link
+          to="/check/erp_os_wireframes"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          ERP OS Wireframes
         </Link>
       </div>
       <div>
@@ -1351,6 +1405,18 @@ export default function Check() {
             <Route path="/app_shell_final" element={<AppShellFinal />} />
             <Route path="/auth_gateway_final" element={<AuthGatewayFinal />} />
             <Route path="/first_run_wizard" element={<FirstRunWizard />} />
+            <Route path="/ceo_initial_setup" element={<CEOInitialSetup />} />
+            <Route
+              path="/ceo_initial_setup_wizard"
+              element={<CEOInitialSetupWizard />}
+            />
+            <Route path="/ceo_setup_matrix" element={<CEOSetupMatrix />} />
+            <Route
+              path="/delegation_overrides"
+              element={<DelegationOverrides />}
+            />
+            <Route path="/erp_app_shell" element={<ERPAppShell />} />
+            <Route path="/erp_os_wireframes" element={<ERPOsWireframes />} />
             <Route
               path="/erp_entry_orchestrator"
               element={<ERPEntryOrchestrator />}
