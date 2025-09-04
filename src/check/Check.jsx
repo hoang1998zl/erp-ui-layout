@@ -116,6 +116,7 @@ import UI99_FutureLab from "./ui-90/UI99_FutureLab.jsx";
 // Default Series - Complete ERP Components
 import AppShellFinal from "./default/app_shell_final_v_0.jsx";
 import AuthGatewayFinal from "./default/auth_gateway_final_v_0.jsx";
+import FirstRunWizard from "./default/first_run_wizard_v_0.jsx";
 import ERPEntryOrchestrator from "./default/erp_entry_orchestrator_v_0.jsx";
 import UI00CEOFinal from "./default/ui_00_ceo_final_v_0.jsx";
 import UI00CEOShell from "./default/ui_00_role_0_ceo_shell.jsx";
@@ -931,6 +932,14 @@ const __SidebarLinks = () => (
       </div>
       <div>
         <Link
+          to="/check/first_run_wizard"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          First Run Wizard
+        </Link>
+      </div>
+      <div>
+        <Link
           to="/check/erp_entry_orchestrator"
           className="block p-2 rounded hover:bg-gray-100"
         >
@@ -1341,6 +1350,7 @@ export default function Check() {
             {/* Default Series Routes */}
             <Route path="/app_shell_final" element={<AppShellFinal />} />
             <Route path="/auth_gateway_final" element={<AuthGatewayFinal />} />
+            <Route path="/first_run_wizard" element={<FirstRunWizard />} />
             <Route
               path="/erp_entry_orchestrator"
               element={<ERPEntryOrchestrator />}
