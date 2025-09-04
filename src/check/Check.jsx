@@ -122,6 +122,7 @@ import CEOSetupMatrix from "./default/CEO_Setup_Matrix.jsx";
 import DelegationOverrides from "./default/DelegationOverrides.jsx";
 import ERPAppShell from "./default/erp_app_shell.jsx";
 import ERPOsWireframes from "./default/Erp_Os_Wireframes.jsx";
+import ERPOSPrototype from "./default/erp_os_prototype.jsx";
 import FirstRunWizard from "./default/first_run_wizard_v_0.jsx";
 import ERPEntryOrchestrator from "./default/erp_entry_orchestrator_v_0.jsx";
 import UI00CEOFinal from "./default/ui_00_ceo_final_v_0.jsx";
@@ -994,6 +995,14 @@ const __SidebarLinks = () => (
       </div>
       <div>
         <Link
+          to="/check/erp_os_prototype"
+          className="block p-2 rounded hover:bg-gray-100"
+        >
+          ERP OS Prototype
+        </Link>
+      </div>
+      <div>
+        <Link
           to="/check/erp_entry_orchestrator"
           className="block p-2 rounded hover:bg-gray-100"
         >
@@ -1417,6 +1426,7 @@ export default function Check() {
             />
             <Route path="/erp_app_shell" element={<ERPAppShell />} />
             <Route path="/erp_os_wireframes" element={<ERPOsWireframes />} />
+            <Route path="/erp_os_prototype" element={<ERPOSPrototype />} />
             <Route
               path="/erp_entry_orchestrator"
               element={<ERPEntryOrchestrator />}
