@@ -42,6 +42,7 @@ import UI32 from './ui-30/UI32_FormDesigner.jsx'
 import UI33 from './ui-30/UI33_RulesEngine.jsx'
 import UI34 from './ui-30/UI34_DocGenTemplate.jsx'
 import UI35 from './ui-30/UI35_DataPipelines.jsx'
+import Final from './final/Final.jsx'
 
 const ROUTES = [
   // Core System (UI-00)
@@ -145,20 +146,6 @@ function Home() {
         </div>
         
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="p-6 transition-shadow bg-white border border-gray-200 shadow-lg rounded-2xl hover:shadow-xl">
-            <div className="text-center">
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full">
-                <div className="text-2xl">🎨</div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold">Demo Mode</h3>
-              <p className="mb-4 text-gray-600">Interactive showcase with grouped navigation and rich content examples</p>
-              <button 
-                onClick={() => navigate('/demo')}
-                className="px-6 py-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
-                Explore Demo
-              </button>
-            </div>
-          </div>
           
           <div className="p-6 transition-shadow bg-white border border-gray-200 shadow-lg rounded-2xl hover:shadow-xl">
             <div className="text-center">
@@ -170,6 +157,21 @@ function Home() {
               <button 
                 onClick={() => navigate('/check')}
                 className="px-6 py-2 text-white transition-colors bg-green-600 rounded-lg hover:bg-green-700">
+                Browse Pages
+              </button>
+            </div>
+          </div>
+          
+          <div className="p-6 transition-shadow bg-white border border-gray-200 shadow-lg rounded-2xl hover:shadow-xl">
+            <div className="text-center">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full">
+                <div className="text-2xl">🗂️</div>
+              </div>
+              <h3 className="mb-2 text-xl font-semibold">Final Mode</h3>
+              <p className="mb-4 text-gray-600">Traditional routing with sidebar navigation and individual page URLs</p>
+              <button 
+                onClick={() => navigate('/final')}
+                className="px-6 py-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
                 Browse Pages
               </button>
             </div>
@@ -195,6 +197,7 @@ export default function App(){
         <Route path="/" element={<Home />} />
         <Route path="/demo" element={<DemoMode />} />
         <Route path="/check/*" element={<Check />} />
+        <Route path="/final/*" element={<Final />} />
       </Routes>
     </BrowserRouter>
   )
